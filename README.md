@@ -1,8 +1,9 @@
 # 🔧 milhy545 - System Engineering Portfolio
 
-> **Philosophy: "Cherry-pick and compose, don't install and hope"**
+> **Philosophy: "Cherry-pick and compose, don't install and hope"**  
+> **Hardware Motto: "Refix, Reuse, or Recycle"**
 
-Instead of installing 10 different programs to solve one problem, I take specific functions from various sources and implement exactly what's needed for my situation. This portfolio showcases **modular system engineering** - building custom solutions by composing the right components.
+Instead of installing 10 different programs to solve one problem, I take specific functions from various sources and implement exactly what's needed for my situation. This portfolio showcases **modular system engineering** - building custom solutions by composing the right components, often on hardware that others would consider obsolete.
 
 ## 🚀 **Transformation Journey: 7 Months from Gaming to System Engineering**
 
@@ -20,8 +21,34 @@ Instead of installing 10 different programs to solve one problem, I take specifi
 - ✅ **From single Windows PC** → **Multi-server Linux infrastructure**
 - ✅ **From gaming mindset** → **Professional system engineering approach**
 - ✅ **From basic user** → **Claude Code CLI Pro expert with cross-platform development**
+- ✅ **From buying new hardware** → **"Refix, Reuse, or Recycle" resourcefulness**
 
 > *"The same focus and problem-solving skills that made me effective in gaming translate perfectly to system engineering - it's just a different kind of complex system to master."*
+
+## 💻 **Hardware Resourcefulness: Running Modern on Vintage**
+
+### **Current Production Setup**
+**Development Workstation (Daily Driver)**:
+- **Acer Aspire Z5610 AIO** (2009 - 15+ years old!)
+- **Intel Core2 Quad Q9550** @ 2.83GHz (Vintage quad-core)
+- **8GB RAM** (Upgraded from original)
+- **AMD Radeon HD 4530** (Retro graphics, still working)
+- **Running**: Ubuntu 25.04, Docker, Claude Code CLI Pro, full development stack
+
+**Production Server (24/7 Infrastructure)**:
+- **Old Headless Laptop** (Even older than workstation!)
+- **Running**: 15+ Docker containers, MCP services, databases
+- **Uptime**: Continuous production service at 192.168.0.58
+
+### **The "Impossible" Achievement**
+What others throw away, I optimize and deploy:
+- ✅ **Modern Ubuntu 25.04** on 2009 hardware
+- ✅ **Docker orchestration** on ancient CPU architecture
+- ✅ **AI development workflows** on vintage workstation
+- ✅ **Production server** on discarded laptop
+- ✅ **Cross-platform development** including Android ADB
+
+> *"Budget constraints breed innovation - when you can't buy new hardware, you become a master of optimization and resourcefulness."*
 
 ## 🎯 **Core Approach**
 
@@ -29,7 +56,9 @@ Instead of installing 10 different programs to solve one problem, I take specifi
 - ✅ **Cherry-pick solutions** - Take only needed functions from existing projects
 - ✅ **Compose & integrate** - Build custom implementation for specific use case
 - ✅ **Optimize for context** - Adapt to exact requirements, not general use
+- ✅ **Hardware constraints as innovation driver** - Make it work on anything
 - ❌ **Avoid bloat** - No installing full software stacks for single features
+- ❌ **No hardware waste** - Refix, reuse, or recycle before buying new
 
 ---
 
@@ -197,6 +226,8 @@ Result: 200MB total, instant startup, exactly needed features
 - **Maintenance**: Single person can maintain entire infrastructure
 - **Learning Velocity**: 7-month transformation from gaming to professional system engineering
 - **Cross-Platform Mastery**: Linux, Android ADB, Claude Code CLI Pro expertise
+- **Hardware Optimization**: Modern development workflows on 15+ year old hardware
+- **Sustainability Impact**: Production systems running on "e-waste" hardware
 
 ---
 
@@ -211,6 +242,8 @@ In an era of software bloat and "install everything" mentalities, this portfolio
 5. **Independence** - Not locked into vendor ecosystems or heavy frameworks
 6. **Rapid Learning Ability** - 7-month transformation proves adaptability and growth mindset
 7. **Modern Tool Mastery** - Advanced AI-assisted development with Claude Code CLI Pro
+8. **Hardware Resourcefulness** - Making "impossible" work: modern development on vintage hardware
+9. **Sustainability Mindset** - "Refix, Reuse, or Recycle" approach to technology
 
 **The result**: Efficient, maintainable, custom-fitted solutions that do exactly what's needed without the bloat, developed by someone who can learn and adapt to any technology stack rapidly.
 
@@ -220,6 +253,8 @@ In an era of software bloat and "install everything" mentalities, this portfolio
 - **Modern Development Approach** - Expert-level AI-assisted development workflows
 - **Cross-Platform Competency** - Comfortable across Linux, Android, and emerging platforms
 - **Production-Ready Skills** - Not just learning, but deploying and maintaining real infrastructure
+- **Resource Optimization Mastery** - Delivering modern solutions under extreme hardware constraints
+- **Sustainability Leadership** - Proving that innovation doesn't require constant hardware upgrades
 
 ---
 
@@ -227,4 +262,10 @@ In an era of software bloat and "install everything" mentalities, this portfolio
 
 > **From Windows Gamer to Linux System Engineer in 7 months - proving that with the right focus and modern tools like Claude Code CLI, traditional learning timelines don't apply.**
 
-**Contact**: Available for system architecture and integration projects where rapid learning, efficiency, and custom-fitting matter more than following standard patterns. Particularly interested in UK opportunities where innovation and adaptability are valued.
+> **"Refix, Reuse, or Recycle" - Running production infrastructure on hardware others discard, proving that innovation comes from resourcefulness, not expensive equipment.**
+
+**Contact**: Available for system architecture and integration projects where rapid learning, efficiency, sustainability, and custom-fitting matter more than following standard patterns. Particularly interested in UK opportunities where innovation, adaptability, and environmental consciousness are valued.
+
+---
+
+*Currently developing on a 2009 Acer AIO and serving production traffic from a headless laptop - because the best solutions work everywhere, not just on the latest hardware.*
