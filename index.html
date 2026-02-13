@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stanislav "Milhy" Muller - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600;800&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f5f4; /* stone-100 */
+            color: #1c1917; /* stone-900 */
+        }
+
+        .font-mono {
+            font-family: 'JetBrains+Mono', monospace;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e7e5e4;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #a8a29e;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #78716c;
+        }
+
+        /* Chart Container Utilities */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            height: 300px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+
+        /* Infrastructure Node Styling */
+        .infra-node {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .infra-node:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-color: #ea580c; /* orange-600 */
+        }
+        .infra-node.active {
+            border-color: #ea580c;
+            background-color: #fff7ed; /* orange-50 */
+        }
+
+        /* Terminal Window Styling */
+        .terminal-window {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            border-radius: 0.5rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            overflow: hidden;
+        }
+        .terminal-header {
+            background-color: #333;
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .terminal-body {
+            padding: 1rem;
+            font-family: 'JetBrains+Mono', monospace;
+        }
+        .cursor-blink {
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+    </style>
+    <!-- Chosen Palette: Warm Neutrals with Industrial Orange Accents -->
+    <!-- Application Structure Plan: Updated Projects Section - Orchestration fix & eDEX-UI addition -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="antialiased selection:bg-orange-200 selection:text-orange-900">
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-stone-100/90 backdrop-blur border-b border-stone-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    <span class="text-2xl text-orange-600">⚡</span>
+                    <span class="font-bold text-xl tracking-tight text-stone-800">milhy545</span>
+                </div>
+
+                <!-- Desktop Nav -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <button onclick="scrollToSection('hero')" class="text-stone-600 hover:text-orange-600 transition-colors font-medium" data-lang-key="nav_home">Home</button>
+                    <button onclick="scrollToSection('pivot')" class="text-stone-600 hover:text-orange-600 transition-colors font-medium" data-lang-key="nav_pivot">The Pivot</button>
+                    <button onclick="scrollToSection('infra')" class="text-stone-600 hover:text-orange-600 transition-colors font-medium" data-lang-key="nav_infra">Infrastructure</button>
+                    <button onclick="scrollToSection('stack')" class="text-stone-600 hover:text-orange-600 transition-colors font-medium" data-lang-key="nav_stack">Arsenal</button>
+                    <button onclick="scrollToSection('projects')" class="text-stone-600 hover:text-orange-600 transition-colors font-medium" data-lang-key="nav_projects">Projects</button>
+
+                    <!-- Language Toggle -->
+                    <div class="border-l border-stone-300 pl-4 ml-4 flex gap-2">
+                        <button onclick="setLanguage('en')" id="btn-en" class="font-bold text-orange-600">EN</button>
+                        <span class="text-stone-300">|</span>
+                        <button onclick="setLanguage('cs')" id="btn-cs" class="text-stone-400 hover:text-stone-600">CZ</button>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center gap-4">
+                    <div class="flex gap-2 text-sm font-bold">
+                        <button onclick="setLanguage('en')" id="btn-en-mobile" class="text-orange-600">EN</button>
+                        <span>/</span>
+                        <button onclick="setLanguage('cs')" id="btn-cs-mobile" class="text-stone-400">CZ</button>
+                    </div>
+                    <button onclick="toggleMobileMenu()" class="text-stone-600 hover:text-orange-600 text-2xl">☰</button>
+                </div>
+            </div>
+
+            <div id="mobile-menu" class="hidden md:hidden pb-4 bg-stone-100 border-t border-stone-200">
+                 <button onclick="scrollToSection('hero')" class="block w-full text-left px-4 py-2 text-stone-600 hover:bg-stone-200" data-lang-key="nav_home">Home</button>
+                 <button onclick="scrollToSection('pivot')" class="block w-full text-left px-4 py-2 text-stone-600 hover:bg-stone-200" data-lang-key="nav_pivot">The Pivot</button>
+                 <button onclick="scrollToSection('infra')" class="block w-full text-left px-4 py-2 text-stone-600 hover:bg-stone-200" data-lang-key="nav_infra">Infrastructure</button>
+                 <button onclick="scrollToSection('stack')" class="block w-full text-left px-4 py-2 text-stone-600 hover:bg-stone-200" data-lang-key="nav_stack">Arsenal</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="pt-20 pb-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <div class="inline-flex items-center rounded-full bg-orange-100 px-3 py-1 text-sm font-medium text-orange-800 mb-4" data-lang-key="hero_location">
+                    📍 Newport, UK &bull; Open to Relocation
+                </div>
+                <h1 class="text-4xl sm:text-5xl font-extrabold text-stone-900 tracking-tight mb-4">
+                    Stanislav "Milhy" Muller
+                </h1>
+                <h2 class="text-xl sm:text-2xl text-stone-600 mb-6 font-medium" data-lang-key="hero_role">
+                    Junior Linux SysAdmin | Python Developer | Hardware Enthusiast
+                </h2>
+                <p class="text-lg text-stone-600 mb-8 leading-relaxed" data-lang-key="hero_desc">
+                    Ex-Electrician transitioning to DevOps. I specialize in <span class="font-bold text-stone-800">Extreme Optimization</span> and the <span class="font-bold text-stone-800">3R Principle (Re-fix, Reuse, Recycle)</span>. If it runs on an Intel Atom, it will fly on the Cloud.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <button onclick="scrollToSection('contact')" class="px-6 py-3 bg-stone-900 text-white font-semibold rounded-lg shadow-lg hover:bg-stone-700 transition-all" data-lang-key="btn_contact">
+                        Contact Me
+                    </button>
+                    <button onclick="scrollToSection('projects')" class="px-6 py-3 bg-white text-stone-900 border border-stone-300 font-semibold rounded-lg shadow-sm hover:bg-stone-50 transition-all" data-lang-key="btn_projects">
+                        View Projects
+                    </button>
+                </div>
+            </div>
+
+            <!-- Hero Stats / Console Vibe -->
+            <div class="terminal-window h-full min-h-[300px] flex flex-col">
+                <div class="terminal-header">
+                    <div class="terminal-dot bg-red-500"></div>
+                    <div class="terminal-dot bg-yellow-500"></div>
+                    <div class="terminal-dot bg-green-500"></div>
+                    <span class="text-xs text-gray-400 ml-2">milhy@server:~/portfolio</span>
+                </div>
+                <div class="terminal-body flex-1 overflow-y-auto text-sm" id="hero-terminal">
+                    <!-- Dynamic Content via JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- THE PIVOT SECTION -->
+    <section id="pivot" class="py-16 bg-white border-y border-stone-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-stone-900" data-lang-key="pivot_title">The "Electrician to Dev" Pivot</h2>
+                <p class="mt-4 text-stone-600 max-w-2xl mx-auto" data-lang-key="pivot_desc">
+                    Why hire an ex-electrician for IT? Because the mindset is transferable. I don't guess; I measure, isolate, and fix.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="p-6 bg-stone-50 rounded-xl border border-stone-200 hover:shadow-md transition-all">
+                    <div class="text-3xl mb-4">🔧</div>
+                    <h3 class="text-xl font-bold text-stone-900 mb-2" data-lang-key="skill_1_title">Troubleshooting</h3>
+                    <div class="flex items-center justify-between text-sm text-stone-500 mb-2">
+                        <span data-lang-key="skill_1_left">Electrician</span>
+                        <span data-lang-key="skill_1_right">DevOps</span>
+                    </div>
+                    <div class="w-full bg-stone-200 rounded-full h-2.5 mb-4">
+                        <div class="bg-orange-500 h-2.5 rounded-full" style="width: 100%"></div>
+                    </div>
+                    <p class="text-stone-600" data-lang-key="skill_1_desc">
+                        From tracing short circuits in physical walls to tracing memory leaks in Docker containers. The logic of isolation remains the same.
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="p-6 bg-stone-50 rounded-xl border border-stone-200 hover:shadow-md transition-all">
+                    <div class="text-3xl mb-4">🦺</div>
+                    <h3 class="text-xl font-bold text-stone-900 mb-2" data-lang-key="skill_2_title">Safety First</h3>
+                    <div class="flex items-center justify-between text-sm text-stone-500 mb-2">
+                        <span data-lang-key="skill_2_left">High Voltage</span>
+                        <span data-lang-key="skill_2_right">Root Access</span>
+                    </div>
+                    <div class="w-full bg-stone-200 rounded-full h-2.5 mb-4">
+                        <div class="bg-orange-500 h-2.5 rounded-full" style="width: 100%"></div>
+                    </div>
+                    <p class="text-stone-600" data-lang-key="skill_2_desc">
+                        I treat <code class="bg-stone-200 px-1 py-0.5 rounded text-red-600">rm -rf</code> with the same respect as a 400V live wire. Measure twice, cut once.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="p-6 bg-stone-50 rounded-xl border border-stone-200 hover:shadow-md transition-all">
+                    <div class="text-3xl mb-4">🏗️</div>
+                    <h3 class="text-xl font-bold text-stone-900 mb-2" data-lang-key="skill_3_title">Real-World Logic</h3>
+                    <div class="flex items-center justify-between text-sm text-stone-500 mb-2">
+                        <span data-lang-key="skill_3_left">Construction Site</span>
+                        <span data-lang-key="skill_3_right">Production Env</span>
+                    </div>
+                    <div class="w-full bg-stone-200 rounded-full h-2.5 mb-4">
+                        <div class="bg-orange-500 h-2.5 rounded-full" style="width: 100%"></div>
+                    </div>
+                    <p class="text-stone-600" data-lang-key="skill_3_desc">
+                        Systems must work in dirty, imperfect environments, not just theoretical vacuums. I build for resilience.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INFRASTRUCTURE SECTION (Interactive Map) -->
+    <section id="infra" class="py-16 bg-stone-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-10">
+                <h2 class="text-3xl font-bold text-stone-900" data-lang-key="infra_title">Infrastructure as Code - Real World Lab</h2>
+                <p class="mt-4 text-stone-600 max-w-3xl" data-lang-key="infra_desc">
+                    Explore my "e-waste" cluster. Click on any node to see how I optimize legacy hardware for modern production workloads.
+                    This setup proves the <span class="font-bold text-orange-600">3R Principle</span>: Re-fix, Reuse, Recycle.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Interactive Diagram Area -->
+                <div class="lg:col-span-2 bg-white p-6 rounded-xl border border-stone-200 shadow-sm relative">
+                    <div class="absolute top-4 right-4 text-xs font-mono text-stone-400" data-lang-key="click_hint">Click nodes for details</div>
+
+                    <!-- Diagram Container -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 h-full items-center">
+
+                        <!-- Node 1 -->
+                        <div class="infra-node p-4 border-2 border-stone-200 rounded-lg bg-stone-50" onclick="showNodeDetails('aspire')">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="font-bold text-stone-800" data-lang-key="node_1_name">🖥️ Workstation</span>
+                                <span class="text-xs bg-green-100 text-green-800 px-2 py-0.5 rounded-full">Online</span>
+                            </div>
+                            <div class="text-sm font-mono text-stone-600">Aspire-PC</div>
+                            <div class="text-xs text-stone-400 mt-1" data-lang-key="node_1_sub">Gateway & Daily Driver</div>
+                        </div>
+
+                        <!-- Node 2 -->
+                        <div class="infra-node p-4 border-2 border-stone-200 rounded-lg bg-stone-50" onclick="showNodeDetails('ai_node')">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="font-bold text-stone-800" data-lang-key="node_2_name">🧠 AI Node</span>
+                                <span class="text-xs bg-green-100 text-green-800 px-2 py-0.5 rounded-full">Processing</span>
+                            </div>
+                            <div class="text-sm font-mono text-stone-600">LLMS (Core2 Quad)</div>
+                            <div class="text-xs text-stone-400 mt-1" data-lang-key="node_2_sub">Dedicated Ollama Compute</div>
+                        </div>
+
+                        <!-- Node 3 -->
+                        <div class="infra-node p-4 border-2 border-stone-200 rounded-lg bg-stone-50" onclick="showNodeDetails('server')">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="font-bold text-stone-800" data-lang-key="node_3_name">🐳 Home Server</span>
+                                <span class="text-xs bg-green-100 text-green-800 px-2 py-0.5 rounded-full">24/7 Uptime</span>
+                            </div>
+                            <div class="text-sm font-mono text-stone-600">HAS (Docker Host)</div>
+                            <div class="text-xs text-stone-400 mt-1" data-lang-key="node_3_sub">ZEN, MCP, SSH (Secure)</div>
+                        </div>
+
+                        <!-- Node 4 -->
+                        <div class="infra-node p-4 border-2 border-stone-200 rounded-lg bg-stone-50" onclick="showNodeDetails('mobile')">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="font-bold text-stone-800" data-lang-key="node_4_name">📱 Travel Rig</span>
+                                <span class="text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full">Mobile Edge</span>
+                            </div>
+                            <div class="text-sm font-mono text-stone-600">Realme 8 + Netbook</div>
+                            <div class="text-xs text-stone-400 mt-1" data-lang-key="node_4_sub">Termux + RNDIS</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Details Panel -->
+                <div class="lg:col-span-1">
+                    <div id="node-details" class="h-full bg-stone-900 text-stone-300 p-6 rounded-xl shadow-lg border border-stone-700 flex flex-col justify-center">
+                        <div class="text-center text-stone-500 animate-pulse">
+                            &larr; Select a node to inspect hardware & roles
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TECHNICAL ARSENAL SECTION -->
+    <section id="stack" class="py-16 bg-white border-t border-stone-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-10 flex flex-col md:flex-row justify-between items-end">
+                <div>
+                    <h2 class="text-3xl font-bold text-stone-900" data-lang-key="stack_title">Technical Arsenal</h2>
+                    <p class="mt-4 text-stone-600" data-lang-key="stack_desc">
+                        A curated toolkit for efficiency. I don't use everything; I use what works on low resources.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Category Filter / List -->
+                <div class="lg:col-span-1 space-y-2">
+                    <button onclick="updateTechChart('all')" class="tech-btn w-full text-left px-4 py-3 rounded-lg bg-stone-100 hover:bg-orange-50 hover:text-orange-700 transition-colors font-medium border border-transparent focus:border-orange-500 active-category" data-lang-key="cat_all">All Categories</button>
+                    <button onclick="updateTechChart('cli')" class="tech-btn w-full text-left px-4 py-3 rounded-lg bg-white hover:bg-stone-50 text-stone-600 border border-stone-200" data-lang-key="cat_cli">Shell & CLI</button>
+                    <button onclick="updateTechChart('os')" class="tech-btn w-full text-left px-4 py-3 rounded-lg bg-white hover:bg-stone-50 text-stone-600 border border-stone-200" data-lang-key="cat_os">OS & Core</button>
+                    <button onclick="updateTechChart('container')" class="tech-btn w-full text-left px-4 py-3 rounded-lg bg-white hover:bg-stone-50 text-stone-600 border border-stone-200" data-lang-key="cat_cont">Containerization</button>
+                    <button onclick="updateTechChart('ai')" class="tech-btn w-full text-left px-4 py-3 rounded-lg bg-white hover:bg-stone-50 text-stone-600 border border-stone-200" data-lang-key="cat_ai">AI Tooling</button>
+                    <button onclick="updateTechChart('dev')" class="tech-btn w-full text-left px-4 py-3 rounded-lg bg-white hover:bg-stone-50 text-stone-600 border border-stone-200" data-lang-key="cat_dev">Development</button>
+                </div>
+
+                <!-- Visualization -->
+                <div class="lg:col-span-2">
+                    <div class="bg-stone-50 p-6 rounded-xl border border-stone-200">
+                        <div class="chart-container">
+                            <canvas id="techChart"></canvas>
+                        </div>
+                        <p id="chart-desc" class="mt-4 text-center text-sm text-stone-500">
+                            Showing complete technology overview.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURED PROJECTS SECTION -->
+    <section id="projects" class="py-16 bg-stone-100">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-stone-900 mb-8" data-lang-key="projects_title">Projects (Real Repos)</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Repo 1: MyCoder v2.0 -->
+                <div class="bg-white rounded-lg shadow-sm border border-stone-200 hover:border-orange-300 transition-all flex flex-col h-full cursor-pointer group" onclick="window.open('https://github.com/milhy545/MyCoder-v2.0', '_blank')">
+                    <div class="p-5 flex-1">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-2xl">🧠</span>
+                            <span class="text-xs font-mono bg-blue-100 text-blue-800 px-2 py-1 rounded">Python/Docker</span>
+                        </div>
+                        <h3 class="font-bold text-lg text-stone-900 mb-2 group-hover:text-orange-600 transition-colors">MyCoder v2.0 & Voice Control</h3>
+                        <p class="text-sm text-stone-600 mb-4" data-lang-key="repo_1_desc">
+                            Self-evolving AI coding assistant with offline voice control (Whisper) and "Lightweight" mode for legacy hardware. Includes Proposal Engine for self-improvement.
+                        </p>
+                    </div>
+                    <div class="bg-stone-50 px-5 py-3 border-t border-stone-100 text-xs font-mono text-stone-500 flex justify-between">
+                        <span>Flagship</span>
+                        <span class="text-orange-600">Active</span>
+                    </div>
+                </div>
+
+                <!-- Repo 2: Orchestration (UPDATED) -->
+                <div class="bg-white rounded-lg shadow-sm border border-stone-200 hover:border-orange-300 transition-all flex flex-col h-full cursor-pointer group" onclick="window.open('https://github.com/milhy545/orchestration', '_blank')">
+                    <div class="p-5 flex-1">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-2xl">🏗️</span>
+                            <span class="text-xs font-mono bg-blue-100 text-blue-800 px-2 py-1 rounded">Docker Compose</span>
+                        </div>
+                        <h3 class="font-bold text-lg text-stone-900 mb-2 group-hover:text-orange-600 transition-colors">Orchestration & Dual-Coordinator</h3>
+                        <p class="text-sm text-stone-600 mb-4" data-lang-key="repo_2_desc">
+                            Mega+Zen architecture. Mega handles complex logic, Zen handles fast execution. Optimized to run on < 6GB RAM Docker clusters.
+                        </p>
+                    </div>
+                    <div class="bg-stone-50 px-5 py-3 border-t border-stone-100 text-xs font-mono text-stone-500 flex justify-between">
+                        <span>Infrastructure</span>
+                        <span class="text-orange-600">Active</span>
+                    </div>
+                </div>
+
+                <!-- Repo 3: eDEX-UI (UPDATED) -->
+                <div class="bg-white rounded-lg shadow-sm border border-stone-200 hover:border-orange-300 transition-all flex flex-col h-full cursor-pointer group" onclick="window.open('https://github.com/milhy545/edex-ui', '_blank')">
+                    <div class="p-5 flex-1">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-2xl">📟</span>
+                            <span class="text-xs font-mono bg-purple-100 text-purple-800 px-2 py-1 rounded">Electron/Node</span>
+                        </div>
+                        <h3 class="font-bold text-lg text-stone-900 mb-2 group-hover:text-orange-600 transition-colors">eDEX-UI (Custom Fork)</h3>
+                        <p class="text-sm text-stone-600 mb-4" data-lang-key="repo_3_desc">
+                            Sci-fi terminal emulator and system monitor. Shows my love for cyberpunk aesthetics and functional visualizations.
+                        </p>
+                    </div>
+                    <div class="bg-stone-50 px-5 py-3 border-t border-stone-100 text-xs font-mono text-stone-500 flex justify-between">
+                        <span>Frontend</span>
+                        <span class="text-stone-400">Maintenance</span>
+                    </div>
+                </div>
+
+                <!-- Repo 4: Claude Desktop -->
+                <div class="bg-white rounded-lg shadow-sm border border-stone-200 hover:border-orange-300 transition-all flex flex-col h-full cursor-pointer group" onclick="window.open('https://github.com/milhy545/claude-desktop', '_blank')">
+                    <div class="p-5 flex-1">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-2xl">🖥️</span>
+                            <span class="text-xs font-mono bg-orange-100 text-orange-800 px-2 py-1 rounded">Rust/Tauri</span>
+                        </div>
+                        <h3 class="font-bold text-lg text-stone-900 mb-2 group-hover:text-orange-600 transition-colors">Claude Desktop (Linux/Tauri)</h3>
+                        <p class="text-sm text-stone-600 mb-4" data-lang-key="repo_4_desc">
+                            Unofficial custom build of Claude for Linux using Rust and Tauri. Features experimental voice input and system integration.
+                        </p>
+                    </div>
+                    <div class="bg-stone-50 px-5 py-3 border-t border-stone-100 text-xs font-mono text-stone-500 flex justify-between">
+                        <span>Application</span>
+                        <span class="text-orange-600">Active</span>
+                    </div>
+                </div>
+
+                <!-- Repo 5: MultiCode AI Bot -->
+                <div class="bg-white rounded-lg shadow-sm border border-stone-200 hover:border-orange-300 transition-all flex flex-col h-full cursor-pointer group" onclick="window.open('https://github.com/milhy545/multicode-ai-bot', '_blank')">
+                    <div class="p-5 flex-1">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-2xl">🤖</span>
+                            <span class="text-xs font-mono bg-green-100 text-green-800 px-2 py-1 rounded">Python</span>
+                        </div>
+                        <h3 class="font-bold text-lg text-stone-900 mb-2 group-hover:text-orange-600 transition-colors">MultiCode AI Bot</h3>
+                        <p class="text-sm text-stone-600 mb-4" data-lang-key="repo_5_desc">
+                            Unified interface leveraging multiple providers (Gemini, Claude, DeepSeek, Ollama) with robust failover and rate-limiting logic.
+                        </p>
+                    </div>
+                    <div class="bg-stone-50 px-5 py-3 border-t border-stone-100 text-xs font-mono text-stone-500 flex justify-between">
+                        <span>Automation</span>
+                        <span class="text-stone-400">Stable</span>
+                    </div>
+                </div>
+
+                <!-- Repo 6: Showcase / Docs -->
+                <div class="bg-white rounded-lg shadow-sm border border-stone-200 hover:border-orange-300 transition-all flex flex-col h-full cursor-pointer group" onclick="window.open('https://github.com/milhy545/milhy545-showcase/README.md', '_blank')">
+                    <div class="p-5 flex-1">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-2xl">📚</span>
+                            <span class="text-xs font-mono bg-gray-100 text-gray-800 px-2 py-1 rounded">Markdown</span>
+                        </div>
+                        <h3 class="font-bold text-lg text-stone-900 mb-2 group-hover:text-orange-600 transition-colors">The Showcase Hub &rarr;</h3>
+                        <p class="text-sm text-stone-600 mb-4" data-lang-key="repo_6_desc">
+                            The central documentation hub. Explains the 3R Principle (Re-fix, Reuse, Recycle) and the philosophy behind running AI on e-waste.
+                        </p>
+                    </div>
+                    <div class="bg-stone-50 px-5 py-3 border-t border-stone-100 text-xs font-mono text-stone-500 flex justify-between">
+                        <span>Philosophy</span>
+                        <span class="text-stone-400">Live</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="py-16 bg-stone-900 text-stone-300">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold text-white mb-6" data-lang-key="contact_title">Ready to Optimize?</h2>
+            <p class="mb-8 text-lg" data-lang-key="contact_desc">
+                Currently based in Newport, UK. Open to roles in South Wales (Cardiff/Bristol) or Remote.
+                I bring the discipline of an electrician and the logic of a developer.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="https://www.linkedin.com/in/stanislav-muller" target="_blank" class="px-8 py-4 bg-orange-600 text-white font-bold rounded-lg hover:bg-orange-700 transition-colors shadow-lg" data-lang-key="btn_linkedin">
+                    Connect on LinkedIn
+                </a>
+                <a href="mailto:contact@milhy.dev" class="px-8 py-4 bg-stone-800 text-white font-bold rounded-lg hover:bg-stone-700 transition-colors border border-stone-700" data-lang-key="btn_email">
+                    Send Email
+                </a>
+            </div>
+            <p class="mt-12 text-sm text-stone-500 font-mono" data-lang-key="copyright">
+                &copy; 2024 Stanislav "Milhy" Muller. <br>Built with 3R Principles. No unnecessary dependencies.
+            </p>
+        </div>
+    </section>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // --- Translations ---
+        const translations = {
+            en: {
+                nav_home: "Home", nav_pivot: "The Pivot", nav_infra: "Infrastructure", nav_stack: "Arsenal", nav_projects: "Projects",
+                hero_location: "📍 Newport, UK &bull; Open to Relocation",
+                hero_role: "Junior Linux SysAdmin | Python Developer | Hardware Enthusiast",
+                hero_desc: "Ex-Electrician transitioning to DevOps. I specialize in <span class='font-bold text-stone-800'>Extreme Optimization</span> and the <span class='font-bold text-stone-800'>3R Principle (Re-fix, Reuse, Recycle)</span>. If it runs on an Intel Atom, it will fly on the Cloud.",
+                btn_contact: "Contact Me", btn_projects: "View Projects",
+                pivot_title: "The \"Electrician to Dev\" Pivot",
+                pivot_desc: "Why hire an ex-electrician for IT? Because the mindset is transferable. I don't guess; I measure, isolate, and fix.",
+                skill_1_title: "Troubleshooting", skill_1_left: "Electrician", skill_1_right: "DevOps",
+                skill_1_desc: "From tracing short circuits in physical walls to tracing memory leaks in Docker containers. The logic of isolation remains the same.",
+                skill_2_title: "Safety First", skill_2_left: "High Voltage", skill_2_right: "Root Access",
+                skill_2_desc: "I treat <code class='bg-stone-200 px-1 py-0.5 rounded text-red-600'>rm -rf</code> with the same respect as a 400V live wire. Measure twice, cut once.",
+                skill_3_title: "Real-World Logic", skill_3_left: "Construction Site", skill_3_right: "Production Env",
+                skill_3_desc: "Systems must work in dirty, imperfect environments, not just theoretical vacuums. I build for resilience.",
+                infra_title: "Infrastructure as Code - Real World Lab",
+                infra_desc: "Explore my \"e-waste\" cluster. Click on any node to see how I optimize legacy hardware for modern production workloads. This setup proves the <span class='font-bold text-orange-600'>3R Principle</span>: Re-fix, Reuse, Recycle.",
+                click_hint: "Click nodes for details",
+                node_1_name: "🖥️ Workstation", node_1_sub: "Gateway & Daily Driver",
+                node_2_name: "🧠 AI Node", node_2_sub: "Dedicated Ollama Compute",
+                node_3_name: "🐳 Home Server", node_3_sub: "ZEN, MCP, SSH (Secure)",
+                node_4_name: "📱 Travel Rig", node_4_sub: "Termux + RNDIS",
+                stack_title: "Technical Arsenal",
+                stack_desc: "A curated toolkit for efficiency. I don't use everything; I use what works on low resources.",
+                cat_all: "All Categories", cat_cli: "Shell & CLI", cat_os: "OS & Core", cat_cont: "Containerization", cat_ai: "AI Tooling", cat_dev: "Development",
+
+                projects_title: "Projects (Real Repos)",
+                repo_1_desc: "Self-evolving AI coding assistant with offline voice control (Whisper) and \"Lightweight\" mode for legacy hardware. Includes Proposal Engine for self-improvement.",
+                repo_2_desc: "Mega+Zen architecture. Mega handles complex logic, Zen handles fast execution. Optimized to run on < 6GB RAM Docker clusters.",
+                repo_3_desc: "Sci-fi terminal emulator and system monitor. Shows my love for cyberpunk aesthetics and functional visualizations.",
+                repo_4_desc: "Unofficial custom build of Claude for Linux using Rust and Tauri. Features experimental voice input and system integration.",
+                repo_5_desc: "Unified interface leveraging multiple providers (Gemini, Claude, DeepSeek, Ollama) with robust failover and rate-limiting logic.",
+                repo_6_desc: "The central documentation hub. Explains the 3R Principle (Re-fix, Reuse, Recycle) and the philosophy behind running AI on e-waste.",
+
+                contact_title: "Ready to Optimize?",
+                contact_desc: "Currently based in Newport, UK. Open to roles in South Wales (Cardiff/Bristol) or Remote. I bring the discipline of an electrician and the logic of a developer.",
+                btn_linkedin: "Connect on LinkedIn", btn_email: "Send Email",
+                copyright: "&copy; 2024 Stanislav \"Milhy\" Muller. <br>Built with 3R Principles. No unnecessary dependencies.",
+                term_ready: "# System Ready. Welcome to the portfolio."
+            },
+            cs: {
+                nav_home: "Domů", nav_pivot: "The Pivot", nav_infra: "Infrastruktura", nav_stack: "Arzenál", nav_projects: "Projekty",
+                hero_location: "📍 Newport, UK &bull; Otevřen relokaci",
+                hero_role: "Junior Linux SysAdmin | Python Vývojář | Hardware Nadšenec",
+                hero_desc: "Ex-Elektrikář přecházející do DevOps. Specializuji se na <span class='font-bold text-stone-800'>Extrémní Optimalizaci</span> a <span class='font-bold text-stone-800'>Princip 3R (Re-fix, Reuse, Recycle)</span>. Co běží na Intel Atom, poletí v Cloudu.",
+                btn_contact: "Kontaktujte mě", btn_projects: "Moje Projekty",
+                pivot_title: "Přechod \"Elektrikář -> Vývojář\"",
+                pivot_desc: "Proč najmout elektrikáře do IT? Protože ten mindset je přenositelný. Nehádám; měřím, izoluji a opravuji.",
+                skill_1_title: "Troubleshooting", skill_1_left: "Elektrikář", skill_1_right: "DevOps",
+                skill_1_desc: "Od hledání zkratů ve zdech po trasování memory leaků v Docker kontejnerech. Logika izolace problému je stejná.",
+                skill_2_title: "Bezpečnost na prvním místě", skill_2_left: "Vysoké napětí", skill_2_right: "Root Přístup",
+                skill_2_desc: "K <code class='bg-stone-200 px-1 py-0.5 rounded text-red-600'>rm -rf</code> přistupuji se stejným respektem jako k 400V pod napětím. Dvakrát měř, jednou řež.",
+                skill_3_title: "Reálná Logika", skill_3_left: "Staveniště", skill_3_right: "Produkční Env",
+                skill_3_desc: "Systémy musí fungovat ve špinavém, nedokonalém prostředí, ne jen v teoretickém vakuu. Stavím pro odolnost.",
+                infra_title: "Infrastructure as Code - Domácí Lab",
+                infra_desc: "Prozkoumejte můj \"e-waste\" cluster. Klikněte na nody a uvidíte, jak optimalizuji starý hardware pro moderní zátěž. Důkaz <span class='font-bold text-orange-600'>Principu 3R</span>.",
+                click_hint: "Klikni pro detaily",
+                node_1_name: "🖥️ Pracovní Stanice", node_1_sub: "Gateway & Daily Driver",
+                node_2_name: "🧠 AI Node", node_2_sub: "Dedikovaný Ollama Compute",
+                node_3_name: "🐳 Home Server", node_3_sub: "ZEN, MCP, SSH (Secure)",
+                node_4_name: "📱 Travel Rig", node_4_sub: "Termux + RNDIS",
+                stack_title: "Technický Arzenál",
+                stack_desc: "Sada nástrojů pro efektivitu. Nepoužívám všechno; používám to, co funguje s minimem zdrojů.",
+                cat_all: "Všechny Kategorie", cat_cli: "Shell & CLI", cat_os: "OS & Jádro", cat_cont: "Kontejnerizace", cat_ai: "AI Nástroje", cat_dev: "Vývoj",
+
+                projects_title: "Projekty (Real Repos)",
+                repo_1_desc: "Samovolně se vyvíjející AI asistent s offline hlasovým ovládáním (Whisper) a \"Lightweight\" režimem pro starý hardware. Obsahuje Proposal Engine pro vlastní vylepšování.",
+                repo_2_desc: "Architektura Mega+Zen. Mega řeší komplexní logiku, Zen rychlou exekuci. Optimalizováno pro běh na Docker clusterech s < 6GB RAM.",
+                repo_3_desc: "Sci-fi terminálový emulátor a systémový monitor. Ukazuje mou lásku k cyberpunk estetice a funkční vizualizaci.",
+                repo_4_desc: "Neoficiální build Claude pro Linux postavený na Rustu a Tauri. Obsahuje experimentální hlasový vstup a systémovou integraci.",
+                repo_5_desc: "Sjednocené rozhraní využívající více poskytovatelů (Gemini, Claude, DeepSeek, Ollama) s robustní logikou pro failover a rate-limiting.",
+                repo_6_desc: "Centrální dokumentační bod. Vysvětluje princip 3R (Re-fix, Reuse, Recycle) a filozofii provozování AI na elektroodpadu.",
+
+                contact_title: "Jdeme optimalizovat?",
+                contact_desc: "Aktuálně v Newportu, UK. Otevřen pozicím v South Wales (Cardiff/Bristol) nebo Remote. Přináším disciplínu elektrikáře a logiku vývojáře.",
+                btn_linkedin: "LinkedIn Profil", btn_email: "Poslat Email",
+                copyright: "&copy; 2024 Stanislav \"Milhy\" Muller. <br>Postaveno na principech 3R. Žádné zbytečné závislosti.",
+                term_ready: "# Systém připraven. Vítejte v portfoliu."
+            }
+        };
+
+        let currentLang = 'en';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+
+            // Update Text Elements
+            document.querySelectorAll('[data-lang-key]').forEach(el => {
+                const key = el.getAttribute('data-lang-key');
+                if (translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+
+            // Update UI Toggles
+            if (lang === 'en') {
+                document.getElementById('btn-en').classList.add('font-bold', 'text-orange-600');
+                document.getElementById('btn-en').classList.remove('text-stone-400');
+                document.getElementById('btn-cs').classList.remove('font-bold', 'text-orange-600');
+                document.getElementById('btn-cs').classList.add('text-stone-400');
+
+                // Mobile
+                document.getElementById('btn-en-mobile').classList.add('text-orange-600');
+                document.getElementById('btn-en-mobile').classList.remove('text-stone-400');
+                document.getElementById('btn-cs-mobile').classList.remove('text-orange-600');
+                document.getElementById('btn-cs-mobile').classList.add('text-stone-400');
+            } else {
+                document.getElementById('btn-cs').classList.add('font-bold', 'text-orange-600');
+                document.getElementById('btn-cs').classList.remove('text-stone-400');
+                document.getElementById('btn-en').classList.remove('font-bold', 'text-orange-600');
+                document.getElementById('btn-en').classList.add('text-stone-400');
+
+                 // Mobile
+                document.getElementById('btn-cs-mobile').classList.add('text-orange-600');
+                document.getElementById('btn-cs-mobile').classList.remove('text-stone-400');
+                document.getElementById('btn-en-mobile').classList.remove('text-orange-600');
+                document.getElementById('btn-en-mobile').classList.add('text-stone-400');
+            }
+
+            // Refresh Dynamic Components (Terminal, Chart, Infra)
+            refreshTerminal();
+
+            // Re-render chart description based on active category
+            const activeCategoryBtn = document.querySelector('.active-category');
+            if(activeCategoryBtn) {
+                 // Trigger the click logic again to refresh text
+                 // Extract category from onclick attr (hacky but works for this scale)
+                 const onClickAttr = activeCategoryBtn.getAttribute('onclick');
+                 const category = onClickAttr.match(/'([^']+)'/)[1];
+                 updateTechChart(category);
+            }
+
+            // Refresh Node Details (if any is open, or default to aspire)
+            showNodeDetails('aspire'); // Reset to default to keep it simple
+        }
+
+        // --- Navigation Logic ---
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+            const menu = document.getElementById('mobile-menu');
+            if (menu && !menu.classList.contains('hidden')) {
+                menu.classList.add('hidden');
+            }
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // --- Terminal Logic ---
+        function refreshTerminal() {
+            const termBody = document.getElementById('hero-terminal');
+            const readyMsg = translations[currentLang].term_ready;
+
+            // Simply re-inject html. In a complex app we would maintain state better.
+            termBody.innerHTML = `
+                <div class="mb-2"><span class="text-green-400">milhy@server:~$</span> ./status_check.sh</div>
+                <div class="mb-2 text-stone-300">
+                    > Checking Identity... <span class="text-green-400">Done</span><br>
+                    > Loading Background... <span class="text-green-400">Electrician (Lv. MAX)</span><br>
+                    > Loading Target Class... <span class="text-yellow-400">DevOps Engineer</span><br>
+                    > Hardware Status... <span class="text-orange-400">Legacy Optimized</span><br>
+                    > Current Focus... <span class="text-blue-400">MCP & Local LLMs</span><br>
+                    > Philosophy... <span class="text-purple-400">"3R Principle" Active</span><br>
+                    <br>
+                    <span class="text-stone-500">${readyMsg}</span>
+                </div>
+                <div class="mt-4">
+                    <span class="text-green-400">milhy@server:~$</span> <span class="cursor-blink">_</span>
+                </div>
+            `;
+        }
+
+        // --- Infrastructure Data & Interaction ---
+        const infraData = {
+            'aspire': {
+                en: {
+                    title: 'Aspire-PC (Workstation)', cpu: 'Intel E8400 (Legacy Dual Core)', os: 'MX Linux KDE', role: 'Gateway & Daily Driver',
+                    optimization: 'Heavily stripped KDE plasma, ZSH optimization, custom swap rules.'
+                },
+                cs: {
+                    title: 'Aspire-PC (Pracovní)', cpu: 'Intel E8400 (Legacy Dual Core)', os: 'MX Linux KDE', role: 'Gateway & Denní použití',
+                    optimization: 'Ořezaná KDE Plasma, ZSH optimalizace, vlastní swap pravidla.'
+                },
+                icon: '🖥️'
+            },
+            'ai_node': {
+                en: {
+                    title: 'AI Node (Compute)', cpu: 'Intel Core2 Quad Q9550', os: 'Debian Minimal', role: 'Dedicated Ollama Node',
+                    optimization: 'Headless, no GUI overhead. Dedicated entirely to tensor computation for quantized models.'
+                },
+                cs: {
+                    title: 'AI Node (Výpočetní)', cpu: 'Intel Core2 Quad Q9550', os: 'Debian Minimal', role: 'Dedikovaný Ollama Node',
+                    optimization: 'Headless, bez GUI. Plně dedikováno tenzorovým výpočtům pro kvantizované modely.'
+                },
+                icon: '🧠'
+            },
+            'server': {
+                en: {
+                    title: 'Home Server (HAS)', cpu: 'Low-power Laptop CPU', os: 'Alpine Linux', role: 'Docker Host',
+                    optimization: 'Runs ZEN, MCP Servers & SSH Entry Point. Docker Compose orchestrated for minimal idle resource usage.'
+                },
+                cs: {
+                    title: 'Domácí Server (HAS)', cpu: 'Low-power Laptop CPU', os: 'Alpine Linux', role: 'Docker Host',
+                    optimization: 'Běží tu ZEN, MCP Servery a SSH vstup. Docker Compose orchestrace pro minimální spotřebu v nečinnosti.'
+                },
+                icon: '🐳'
+            },
+            'mobile': {
+                en: {
+                    title: 'Travel Rig (Mobile Edge)', cpu: 'ARMv8 (Realme 8 5G)', os: 'Termux / Linux Deploy', role: 'Mobile Brain',
+                    optimization: 'Connected via RNDIS to an Atom Netbook (which acts purely as a keyboard/screen terminal). Battery efficient.'
+                },
+                cs: {
+                    title: 'Cestovní Rig (Mobile Edge)', cpu: 'ARMv8 (Realme 8 5G)', os: 'Termux / Linux Deploy', role: 'Mobilní Mozek',
+                    optimization: 'Připojeno přes RNDIS k Atom Netbooku (funguje čistě jako terminál/klávesnice). Efektivní na baterii.'
+                },
+                icon: '📱'
+            }
+        };
+
+        function showNodeDetails(nodeId) {
+            const data = infraData[nodeId][currentLang];
+            const icon = infraData[nodeId].icon;
+            const container = document.getElementById('node-details');
+
+            document.querySelectorAll('.infra-node').forEach(el => el.classList.remove('active'));
+            // Visual feedback logic would go here if we had direct ref to 'this'
+
+            container.innerHTML = `
+                <div class="animate-fade-in-up">
+                    <div class="text-4xl mb-4">${icon}</div>
+                    <h3 class="text-2xl font-bold text-white mb-2">${data.title}</h3>
+                    <div class="h-1 w-20 bg-orange-600 rounded mb-6"></div>
+
+                    <div class="space-y-4 font-mono text-sm">
+                        <div>
+                            <span class="text-stone-500 block text-xs uppercase tracking-wider">CPU</span>
+                            <span class="text-stone-200">${data.cpu}</span>
+                        </div>
+                        <div>
+                            <span class="text-stone-500 block text-xs uppercase tracking-wider">OS</span>
+                            <span class="text-stone-200">${data.os}</span>
+                        </div>
+                        <div>
+                            <span class="text-stone-500 block text-xs uppercase tracking-wider">Role</span>
+                            <span class="text-stone-200">${data.role}</span>
+                        </div>
+                        <div class="bg-stone-800 p-3 rounded border border-stone-700 mt-4">
+                            <span class="text-orange-500 block text-xs uppercase tracking-wider mb-1">Optimization Strategy</span>
+                            <p class="text-stone-300 leading-relaxed">${data.optimization}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // --- Chart.js Implementation for Arsenal ---
+        let techChartInstance = null;
+
+        const techData = {
+            'all': {
+                labels: ['CLI/Shell', 'Linux Core', 'Docker/Container', 'Python/Dev', 'AI Tooling', 'Hardware'],
+                data: [90, 85, 80, 75, 70, 95],
+                colors: ['#334155', '#ea580c', '#0284c7', '#16a34a', '#9333ea', '#dc2626']
+            },
+            'cli': {
+                labels: ['ZSH (Oh-My-Zsh)', 'Bash', 'Claude Code CLI', 'Codex CLI', 'Kilo Code CLI', 'Termux'],
+                data: [95, 90, 85, 60, 50, 80],
+                colors: '#334155'
+            },
+            'os': {
+                labels: ['MX Linux', 'Debian', 'Alpine', 'Systemd', 'SSH Tunneling'],
+                data: [90, 85, 75, 70, 85],
+                colors: '#ea580c'
+            },
+            'container': {
+                labels: ['Docker', 'Compose', 'Portainer', 'Microservices'],
+                data: [85, 90, 80, 75],
+                colors: '#0284c7'
+            },
+            'ai': {
+                // UPDATED DATA: Claude 90, Gemini 85, Codex 85, Ollama 70
+                labels: ['Claude Code', 'Gemini 3', 'Codex', 'Ollama (Local)', 'Vector DBs'],
+                data: [90, 85, 85, 70, 65],
+                colors: '#9333ea'
+            },
+            'dev': {
+                labels: ['Python (Auto/API)', 'Node.js', 'VS Code', 'JetBrains', 'MCP'],
+                data: [85, 60, 90, 50, 80],
+                colors: '#16a34a'
+            }
+        };
+
+        const chartDescriptions = {
+            en: {
+                all: "Showing complete technology overview.",
+                cli: "The Command Line is my home. ZSH and modern CLI tools like Claude Code are daily drivers.",
+                os: "Linux Native. From user-friendly MX to minimal Alpine and headless servers.",
+                container: "Docker everywhere. Orchestrating services with minimal footprint.",
+                ai: "Tooling for the future. High leverage cloud models (Gemini/Codex) combined with local fallback (Ollama).",
+                dev: "Python for automation, Node for MCP servers."
+            },
+            cs: {
+                all: "Přehled kompletního technologického stacku.",
+                cli: "Příkazová řádka je můj domov. ZSH a moderní CLI nástroje jsou denní chleba.",
+                os: "Linux Native. Od uživatelského MX po minimální Alpine a headless servery.",
+                container: "Docker všude. Orchestrace služeb s minimální stopou.",
+                ai: "Nástroje budoucnosti. Výkonné cloud modely (Gemini/Codex) v kombinaci s lokální zálohou (Ollama).",
+                dev: "Python pro automatizaci, Node pro MCP servery."
+            }
+        };
+
+        function initTechChart() {
+            const ctx = document.getElementById('techChart').getContext('2d');
+
+            Chart.defaults.font.family = "'Inter', sans-serif";
+            Chart.defaults.color = '#57534e';
+
+            techChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: techData.all.labels,
+                    datasets: [{
+                        label: 'Proficiency & Usage Impact',
+                        data: techData.all.data,
+                        backgroundColor: techData.all.colors,
+                        borderRadius: 6,
+                        barPercentage: 0.6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#1c1917',
+                            titleFont: { family: 'JetBrains Mono' },
+                            padding: 12,
+                            callbacks: {
+                                label: function(context) {
+                                    return `Impact Score: ${context.raw}/100`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            grid: { color: '#e7e5e4' }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    },
+                    animation: {
+                        duration: 1000,
+                        easing: 'easeOutQuart'
+                    }
+                }
+            });
+        }
+
+        function updateTechChart(category) {
+            // Update active button state
+            document.querySelectorAll('.tech-btn').forEach(btn => {
+                btn.classList.remove('bg-orange-50', 'text-orange-700', 'border-orange-500', 'active-category');
+                btn.classList.add('bg-white', 'text-stone-600', 'border-stone-200');
+            });
+            // Highlight clicked - finding by onclick is a bit loose but works for this SPA scale
+            const activeBtn = document.querySelector(`button[onclick="updateTechChart('${category}')"]`);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-white', 'text-stone-600', 'border-stone-200');
+                activeBtn.classList.add('bg-orange-50', 'text-orange-700', 'border-orange-500', 'active-category');
+            }
+
+            // Update Chart Data
+            const newData = techData[category];
+            techChartInstance.data.labels = newData.labels;
+            techChartInstance.data.datasets[0].data = newData.data;
+            techChartInstance.data.datasets[0].backgroundColor = Array.isArray(newData.colors) ? newData.colors : newData.colors;
+
+            techChartInstance.update();
+
+            // Update Description Text
+            const desc = document.getElementById('chart-desc');
+            // Default to 'all' or category specific text
+            const descKey = chartDescriptions[currentLang][category] ? category : 'all';
+
+            // Fallback for categories without explicit description key logic in object above (simplification)
+            if (chartDescriptions[currentLang][category]) {
+                desc.innerText = chartDescriptions[currentLang][category];
+            } else {
+                desc.innerText = currentLang === 'en' ? `Focusing on ${category.toUpperCase()} stack.` : `Detail kategorie ${category.toUpperCase()}.`;
+            }
+        }
+
+        // Initialize on Load
+        window.addEventListener('load', () => {
+            initTechChart();
+            refreshTerminal(); // Init terminal text
+            showNodeDetails('aspire');
+        });
+
+    </script>
+</body>
+</html>
