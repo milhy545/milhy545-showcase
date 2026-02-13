@@ -2,6 +2,8 @@
 
 ### **Junior Linux System Administrator | Python Developer | Hardware Enthusiast**
 
+[![Open Live Showcase](https://img.shields.io/badge/OPEN-LIVE_SHOWCASE-2ea44f?style=for-the-badge&logo=githubpages&logoColor=white)](https://milhy545.github.io/milhy545-showcase/)
+
 📍 *Newport, United Kingdom* | 🚀 *Open to Relocation (Cardiff/Bristol)*
 
 **"If it runs on an Intel Atom, it will fly on the Cloud."**
