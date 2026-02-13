@@ -1,300 +1,85 @@
-# 🔧 milhy545 - System Engineering Portfolio
-
-> **Philosophy: "Cherry-pick and compose, don't install and hope"**  
-> **Hardware Motto: "Refix, Reuse, or Recycle"**
-
-Instead of installing 10 different programs to solve one problem, I take specific functions from various sources and implement exactly what's needed for my situation. This portfolio showcases **modular system engineering** - building custom solutions by composing the right components, often on hardware that others would consider obsolete.
-
-## 🚀 **Transformation Journey: 7 Months from Gaming to System Engineering**
-
-**January 2024**: Gaming on Windows, basic computer user  
-**August 2024**: Running multiple Linux distributions, deploying production infrastructure with Claude Code CLI, developing cross-platform solutions including Android ADB integration
-
-### **The Acceleration**
-- **Month 1-2**: Switched from Windows to Linux, learned basic terminal
-- **Month 3-4**: Discovered system architecture, began Docker experimentation  
-- **Month 5-6**: Built first production server, learned multiple Linux distributions
-- **Month 7**: Mastering Claude Code CLI Pro, Android development via ADB, managing complex infrastructure
-
-**Key Transformation Markers**:
-- ✅ **From GUI dependency** → **CLI mastery across platforms**
-- ✅ **From single Windows PC** → **Multi-server Linux infrastructure**
-- ✅ **From gaming mindset** → **Professional system engineering approach**
-- ✅ **From basic user** → **Claude Code CLI Pro expert with cross-platform development**
-- ✅ **From buying new hardware** → **"Refix, Reuse, or Recycle" resourcefulness**
-
-> *"The same focus and problem-solving skills that made me effective in gaming translate perfectly to system engineering - it's just a different kind of complex system to master."*
-
-## 💻 **Hardware Resourcefulness: Running Modern on Vintage**
-
-### **Current Production Setup**
-**Development Workstation (Daily Driver)**:
-- **Acer Aspire Z5610 AIO** (2009 - 15+ years old!)
-- **Intel Core2 Quad Q9550** @ 2.83GHz (Vintage quad-core)
-- **8GB RAM** (Upgraded from original)
-- **AMD Radeon HD 4530** (Retro graphics, still working)
-- **Running**: Ubuntu 25.04, Docker, Claude Code CLI Pro, full development stack
-
-**Production Server (24/7 Infrastructure)**:
-- **Old Headless Laptop** (Even older than workstation!)
-- **Running**: 15+ Docker containers, MCP services, databases
-- **Uptime**: Continuous production service at 192.168.0.58
-
-**Next Evolution - Private AI Infrastructure**:
-- **Dell OptiPlex 780** (Another rescue from e-waste)
-- **Planned CPU Migration**: Moving Core2 Quad from overheating AIO
-- **Cooling Solution**: Proper thermal management (current AIO has heatpipe issues)
-- **Private LLM Deployment**: Self-hosted Mistral/Codestral for security-first AI
-
-### **The "Impossible" Achievement**
-What others throw away, I optimize and deploy:
-- ✅ **Modern Ubuntu 25.04** on 2009 hardware
-- ✅ **Docker orchestration** on ancient CPU architecture
-- ✅ **AI development workflows** on vintage workstation
-- ✅ **Production server** on discarded laptop
-- ✅ **Cross-platform development** including Android ADB
-- 🚀 **Private LLM hosting** planned on recycled enterprise hardware
-
-> *"Budget constraints breed innovation - when you can't buy new hardware, you become a master of optimization and resourcefulness."*
-
-### **The Vision: Intelligent Memory-Driven Automation**
-**Goal**: Sophisticated orchestration with intelligent memory that minimizes the need for large LLM queries over time.
-
-**Concept**: Memory-driven mini-agents that learn from past routine processes:
-- **Learning from History**: System remembers all previous operations and contexts
-- **Pattern Recognition**: Identifies routine tasks (package updates, deployments, configs)
-- **Autonomous Replication**: Mini-agents handle learned processes without external LLM calls
-- **Security-First**: Private Mistral/Codestral deployment for sensitive operations
-- **Cost Optimization**: Minimize external API calls through intelligent local memory
-
-*Example*: Package update requests → Memory recalls previous patterns → Mini-agent executes automatically without needing to "think" through the process again.
-
-**The Final Architecture**: Self-learning infrastructure that becomes more autonomous over time, reducing dependency on external AI services while maintaining security and efficiency.
-
-## 🎯 **Core Approach**
-
-- ✅ **Analyze the problem** - What exactly needs to be solved?
-- ✅ **Cherry-pick solutions** - Take only needed functions from existing projects
-- ✅ **Compose & integrate** - Build custom implementation for specific use case
-- ✅ **Optimize for context** - Adapt to exact requirements, not general use
-- ✅ **Hardware constraints as innovation driver** - Make it work on anything
-- ❌ **Avoid bloat** - No installing full software stacks for single features
-- ❌ **No hardware waste** - Refix, reuse, or recycle before buying new
-
----
-
-## 🏗️ **Major System Implementations**
-
-### 🏠 **Home Automation Server Architecture**
-**Problem**: Need centralized AI/automation hub with multiple specialized services
-**Solution**: Compose containerized MCP microservices instead of monolithic platform
-
-- **Server**: `192.168.0.58` running 15+ Docker services
-- **MCP API Cluster**: 6 specialized servers (ports 8001-8008)
-- **Admin Interfaces**: Portainer, Home Assistant, AdGuard
-- **Integration**: Hybrid local/remote MCP architecture
-
-**Cherry-picked from**:
-- MCP Protocol → Custom HTTP API wrappers
-- Docker Compose → Service orchestration
-- Various tools → Only needed functions per container
-
-### 🤖 **AI Integration Ecosystem**
-**Problem**: Multiple AI providers, memory systems, automation needs
-**Solution**: Unified interface composing different AI backends
-
-**Components implemented**:
-- **Memory Systems**: SQLite + Qdrant + Claude memory
-- **Provider Routing**: Anthropic + OpenAI + Perplexity routing
-- **Telegram Integration**: Remote CLI access
-- **Session Management**: Persistent conversations
-
-**Cherry-picked from**:
-- [David Strejc's FEI](https://github.com/david-strejc/fei) → Memory architecture adapted for multi-provider setup
-- [RichardAtCT's Telegram Bot](https://github.com/RichardAtCT/claude-code-telegram) → Remote access adapted for MCP integration
-- Various MCP implementations → Combined into unified HTTP API
-
-### ⚡ **Power Management & System Optimization**
-**Problem**: Need intelligent power profiles with AI-triggered optimization
-**Solution**: Custom daemon replacing system power management
-
-**Implementation**:
-- **Custom Power Daemon**: Replaces default system daemon
-- **AI Process Manager**: Automatic optimization triggers
-- **KDE Integration**: Plasma widgets with custom profiles
-- **Emergency Recovery**: Auto-recovery from system issues
-
-**Result**: 100% custom power management without installing heavy desktop environment power tools.
-
-### 🔧 **MyCoder Development Environment**
-**Problem**: Need hybrid local/remote development with intelligent routing
-**Solution**: Compose MCP servers with smart client routing
-
-**Architecture**:
-- **Local MCP Servers**: Fast file/git/terminal operations
-- **Remote MCP Integration**: Specialized AI/database operations
-- **Intelligent Routing**: Automatic failover and load balancing
-- **Standalone Mode**: Portable development environment
-
-**Cherry-picked from**:
-- MCP Protocol → Custom client implementations
-- Various dev tools → Only needed functions
-- Docker patterns → Service composition
-
----
-
-## 🛠️ **Technical Skills Demonstrated**
-
-### **System Architecture**
-- Docker orchestration and microservices
-- Hybrid local/remote service composition
-- API gateway patterns and intelligent routing
-- Service discovery and health monitoring
-
-### **Integration Engineering**
-- Multiple AI provider integration
-- Protocol adaptation (MCP HTTP wrappers)
-- Legacy system integration (KDE/Plasma)
-- Cross-platform compatibility (Alpine/Ubuntu)
-
-### **Problem-Solving Approach**
-- **Analyze**: Break down complex problems into components
-- **Research**: Find existing solutions for each component
-- **Extract**: Take only needed functionality
-- **Compose**: Build custom implementation
-- **Optimize**: Adapt for specific use case
-
-### **Cherry-Picking Examples**
-| Need | Instead of Installing | Took From | Implemented |
-|------|---------------------|-----------|-------------|
-| AI Memory | Vector DB + Embeddings + RAG stack | David Strejc's memory system | Custom unified memory for multiple AI providers |
-| Remote Access | VPN + SSH + GUI tools | Richard's Telegram bot | Telegram CLI with MCP integration |
-| Power Management | Full DE power suite | Various power tools | Custom daemon with AI triggers |
-| Development Environment | VS Code + plugins + extensions | MCP implementations | Hybrid local/remote intelligent routing |
-| Home Automation | Home Assistant + Add-ons | Multiple docker services | Containerized microservices with unified API |
-
----
-
-## 📊 **Current Infrastructure**
-
-### **Production Systems**
-- **Home Server**: 192.168.0.58 (15+ services, 24/7 uptime)
-- **Development Workstation**: 192.168.0.10 (43+ projects)
-- **Networking**: SSH tunneling, Docker networking, service discovery
-
-### **Active Services**
-- **6 MCP HTTP APIs** (filesystem, git, terminal, database, research, memory)
-- **AI Providers**: Anthropic Claude, OpenAI, Perplexity
-- **Admin Tools**: Portainer, Home Assistant, AdGuard, Webmin
-- **Development**: Telegram bot, remote CLI, session management
-
-### **Technologies Composed**
-- **Languages**: Python, JavaScript, Shell, Go
-- **Frameworks**: FastAPI, Docker, MCP Protocol, SQLite, Qdrant
-- **Infrastructure**: Alpine Linux, SSH, systemd, cron
-- **AI/ML**: Claude API, OpenAI API, Perplexity, vector embeddings
-- **Advanced Tools**: Claude Code CLI Pro (expert level), Android ADB integration
-- **Cross-Platform**: Linux (multiple distros), Android development, Windows (legacy)
-
----
-
-## 🎯 **Philosophy in Action**
-
-### **Traditional Approach** ❌
-```
-Problem: Need AI development environment
-Solution: Install VS Code + 20 extensions + Docker Desktop + 
-         Home Assistant + Node.js + Python + Git GUI + 
-         Database tools + API clients + ...
-Result: 5GB+ installation, slow startup, many unused features
-```
-
-### **My Approach** ✅
-```
-Problem: Need AI development environment
-Analysis: Need file ops + git ops + AI access + remote execution
-Solution: 
-  - Take MCP filesystem → Custom HTTP API (50MB container)
-  - Take git functionality → Custom MCP server (30MB container)
-  - Take AI providers → Unified routing client (Python script)
-  - Take remote access → Telegram bot adaptation (Docker container)
-Result: 200MB total, instant startup, exactly needed features
-```
-
----
-
-## 🚀 **Key Projects**
-
-### **Original Implementations**
-- **[claude-tools-monitor](https://github.com/milhy545/claude-tools-monitor)** - My monitoring toolkit
-- **MyCoder Development Suite** - Hybrid MCP architecture
-- **Power Management System** - Complete system optimization
-- **Home Automation Infrastructure** - Containerized microservices
-
-### **Adapted & Enhanced**
-- **AI Memory Systems** - Based on David Strejc's FEI, adapted for multi-provider
-- **Remote CLI Access** - Based on Richard's Telegram bot, enhanced with MCP
-- **Development Tools** - Cherry-picked from various sources, composed for workflow
-
----
-
-## 📈 **Results & Metrics**
-
-- **System Efficiency**: Custom solutions use 80% less resources than traditional installs
-- **Development Speed**: Hybrid architecture reduces development cycle time by 60%
-- **Reliability**: 24/7 uptime on production server with auto-recovery
-- **Modularity**: Can deploy individual components or full stack as needed
-- **Maintenance**: Single person can maintain entire infrastructure
-- **Learning Velocity**: 7-month transformation from gaming to professional system engineering
-- **Cross-Platform Mastery**: Linux, Android ADB, Claude Code CLI Pro expertise
-- **Hardware Optimization**: Modern development workflows on 15+ year old hardware
-- **Sustainability Impact**: Production systems running on "e-waste" hardware
-- **Future Vision**: Private AI infrastructure with intelligent memory-driven automation
-- **Cost Innovation**: Minimizing external AI API costs through self-learning mini-agents
-
----
-
-## 🏆 **Why This Matters**
-
-In an era of software bloat and "install everything" mentalities, this portfolio demonstrates:
-
-1. **Surgical Problem Solving** - Take exactly what's needed, nothing more
-2. **System Thinking** - Understanding how components work together
-3. **Resource Efficiency** - Maximum functionality with minimum overhead
-4. **Adaptability** - Solutions that fit the problem, not generic tools
-5. **Independence** - Not locked into vendor ecosystems or heavy frameworks
-6. **Rapid Learning Ability** - 7-month transformation proves adaptability and growth mindset
-7. **Modern Tool Mastery** - Advanced AI-assisted development with Claude Code CLI Pro
-8. **Hardware Resourcefulness** - Making "impossible" work: modern development on vintage hardware
-9. **Sustainability Mindset** - "Refix, Reuse, or Recycle" approach to technology
-10. **AI Cost Optimization** - Self-hosted private LLMs with intelligent memory to reduce external dependencies
-11. **Future-Proof Architecture** - Designing systems that learn and become more autonomous over time
-
-**The result**: Efficient, maintainable, custom-fitted solutions that do exactly what's needed without the bloat, developed by someone who can learn and adapt to any technology stack rapidly.
-
-### **What This Transformation Demonstrates to UK Employers:**
-- **Exceptional Learning Velocity** - Mastered complex systems in months, not years
-- **Self-Directed Growth** - Independently evolved from basic user to system architect
-- **Modern Development Approach** - Expert-level AI-assisted development workflows
-- **Cross-Platform Competency** - Comfortable across Linux, Android, and emerging platforms
-- **Production-Ready Skills** - Not just learning, but deploying and maintaining real infrastructure
-- **Resource Optimization Mastery** - Delivering modern solutions under extreme hardware constraints
-- **Sustainability Leadership** - Proving that innovation doesn't require constant hardware upgrades
-- **AI Cost Engineering** - Planning private LLM infrastructure to minimize operational costs
-- **Autonomous System Design** - Building self-learning infrastructure that improves over time
-
----
-
-*"Why install 10 programs when you can implement 1 perfect solution?"*
-
-> **From Windows Gamer to Linux System Engineer in 7 months - proving that with the right focus and modern tools like Claude Code CLI, traditional learning timelines don't apply.**
-
-> **"Refix, Reuse, or Recycle" - Running production infrastructure on hardware others discard, proving that innovation comes from resourcefulness, not expensive equipment.**
-
-**Contact**: Available for system architecture and integration projects where rapid learning, efficiency, sustainability, and custom-fitting matter more than following standard patterns. Particularly interested in UK opportunities where innovation, adaptability, and environmental consciousness are valued.
-
----
-
-*Currently developing on a 2009 Acer AIO and serving production traffic from a headless laptop - because the best solutions work everywhere, not just on the latest hardware.*
-
-**Next Phase**: Migrating to OptiPlex 780 with private Mistral/Codestral deployment for self-hosted AI infrastructure that learns from every operation, progressively reducing external dependencies while maintaining security and cost efficiency.
+# **🔧 Stanislav "Milhy" Muller**
+
+### **Junior Linux System Administrator | Python Developer | Hardware Enthusiast**
+
+📍 *Newport, United Kingdom* | 🚀 *Open to Relocation (Cardiff/Bristol)*
+
+**"If it runs on an Intel Atom, it will fly on the Cloud."**
+
+## **👨‍💻 About Me**
+
+Ex-Electrician transitioning into **DevOps and Linux System Administration**. My background in electrical engineering gave me a disciplined approach to troubleshooting, safety protocols, and complex schematics—skills I now apply to infrastructure and code.
+
+I specialize in **Extreme Optimization**: running modern workloads (LLMs, Docker orchestration, MCP servers) on recycled legacy hardware where every megabyte of RAM counts.
+
+## **🛠️ Technical Arsenal**
+
+| **Category** | **Stack** |
+
+| **Shell & CLI** | **ZSH** (Oh-My-Zsh), Bash, **Claude Code CLI**, **Codex CLI**, **Kilo Code CLI**, **Gemini-cli**, **Termux** |
+
+| **OS & Core** | **Linux** (MX Linux, Debian, Alpine), SSH (Tunneling/Keys), Systemd |
+
+| **Containerization** | **Docker**, Docker Compose, Portainer |
+
+| **Development** | **Python** (Automation, API, MCP), Node.js, **VS Code**, JetBrains (Experimental) |
+
+| **AI Tooling** | **Claude Code**, Gemini 3, Codex, Ollama (Local Inference), Vector DBs |
+
+| **Hardware** | Hardware Diagnostics, Embedded Systems, Power Management |
+
+## **🏗️ Featured Projects**
+
+### **🧠**
+
+![][image1]*The pragmatic foundation for the future J.A.R.V.I.S. concept.*
+
+A modular automation system designed to run generative AI agents locally with specific orchestration logic.
+
+* **Components:** Custom Python orchestrator managing context between LLMs (Mistral/Qwen) and local tools.  
+* **Architecture:** Dual-Coordinator setup (Mega-Orchestrator \+ Zen).  
+* **Challenge:** Running inference and logic on machines with \<6GB RAM without relying on cloud dependencies.  
+* **Solution:** Implemented custom memory management (MCP) to prevent OOM kills on legacy hardware.
+
+### **🔌**
+
+![][image2]Production-grade environment running on specialized "e-waste" hardware.
+
+* **The Cluster Map:**  
+  * **Workstation (Aspire-PC):** Intel E8400, MX Linux KDE \- *Gateway & Daily Driver*.  
+  * **AI Node (LLMS):** Intel Core2 Quad Q9550 \- *Dedicated Ollama Compute Node*.  
+  * **Home Server (HAS):** Docker Host \- *Runs ZEN, MCP Servers & SSH Entry Point (Port 2222\)*.  
+  * **Travel Rig (Mobile Edge):** Realme 8 5G (Brain/Compute) \+ Atom Netbook (Terminal/Keyboard) connected via RNDIS.  
+* **Tech:** Docker Compose, SSH Mesh, Custom Power Management Daemons.
+
+### **🌐**
+
+![][image3]Early adopter of Anthropic's MCP standard.
+
+* Developed custom MCP servers to bridge local Linux filesystems with AI contexts.  
+* Created a hybrid environment where AI agents can safely interact with local hardware (read logs, check system health).
+
+## **⚡ The "Electrician to Dev" Pivot**
+
+Why hire an ex-electrician for IT?
+
+1. **Troubleshooting:** I don't guess. I measure, isolate, and fix.  
+2. **Safety First:** I treat rm \-rf with the same respect as a 400V live wire.  
+3. **Real-World Logic:** I build systems that work in dirty, imperfect environments, not just in theoretical vacuums.
+
+## **📈 Philosophy & Approach**
+
+* **The 3R Principle:** **Re-fix, Reuse, Recycle.** Why buy new hardware when code optimization can solve the bottleneck?  
+* **CLI First:** GUI is optional. True control happens in the terminal (ZSH/Bash).  
+* **Advisor, Not Policeman:** Automation should warn about potential errors but allow overrides if the operator understands the context.
+
+## **📫 Contact**
+
+* **LinkedIn:** [linkedin.com/in/stanislav-muller](https://www.linkedin.com/in/stanislav-muller)  
+* **Location:** Newport, UK (NP19)
+
+[image1]: <data:image/png;base64,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>
+
+[image2]: <data:image/png;base64,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>
+
+[image3]: <data:image/png;base64,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>
