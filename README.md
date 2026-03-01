@@ -75,6 +75,15 @@ Why hire an ex-electrician for IT?
 * **CLI First:** GUI is optional. True control happens in the terminal (ZSH/Bash).  
 * **Advisor, Not Policeman:** Automation should warn about potential errors but allow overrides if the operator understands the context.
 
+## **🏛️ Museum of Evolution**
+
+The showcase now includes a curated "Museum of Evolution" for branches, prototypes, infrastructure pivots, and ideas that shaped the current stack.
+
+* **Live Museum:** [milhy545.github.io/milhy545-showcase/archive/museum/](https://milhy545.github.io/milhy545-showcase/archive/museum/)
+* **Raw Archive Snapshot:** [archive/snapshots/README-2026-02-13-pre-update.md](archive/snapshots/README-2026-02-13-pre-update.md)
+
+This section is intentional: not every prototype survives, but the best mutations become infrastructure.
+
 ## **📫 Contact**
 
 * **LinkedIn:** [linkedin.com/in/stanislav-muller](https://www.linkedin.com/in/stanislav-muller)  

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Direct MCP Bridge | Museum of Evolution</title>
+    <script async src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../../assets/css/museum.css">
+</head>
+<body class="antialiased">
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <a href="../index.html" class="inline-flex items-center text-sm text-orange-300 hover:text-orange-200 mb-8">&larr; Back to museum</a>
+        <section class="rounded-3xl bg-slate-900 border border-slate-800 p-8">
+            <div class="flex flex-wrap items-center gap-3 mb-5">
+                <span class="text-4xl">🧬</span>
+                <span class="px-3 py-1 rounded bg-orange-100 text-orange-800 text-xs font-mono uppercase tracking-wide">Bridge</span>
+                <span class="px-3 py-1 rounded bg-blue-100 text-blue-800 text-xs font-mono uppercase tracking-wide">Evolved</span>
+                <span class="px-3 py-1 rounded bg-slate-800 text-slate-300 text-xs font-mono uppercase tracking-wide">Prototype Era</span>
+            </div>
+            <h1 class="text-4xl font-extrabold text-white mb-4">Direct MCP Bridge</h1>
+            <p class="text-lg text-slate-300 leading-relaxed">
+                A divergent branch that could not survive as a codebase, but still contributed one crucial mutation: explicit tool-to-endpoint routing instead of naive blind proxying.
+            </p>
+        </section>
+
+        <section class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8">
+            <div class="lg:col-span-2 space-y-6">
+                <div class="rounded-3xl bg-slate-900 border border-slate-800 p-8">
+                    <h2 class="text-2xl font-bold text-white mb-4">What it was</h2>
+                    <p class="text-slate-300 leading-relaxed">
+                        The branch explored a simpler, more direct model: map a tool to a service and an endpoint intentionally, then call that route directly instead of pretending every backend supports a universal interface. It was blunt, but honest.
+                    </p>
+                </div>
+                <div class="rounded-3xl bg-slate-900 border border-slate-800 p-8">
+                    <h2 class="text-2xl font-bold text-white mb-4">Why it changed</h2>
+                    <p class="text-slate-300 leading-relaxed">
+                        As a branch, it became a parallel timeline. It diverged too far, deleted too much modern infrastructure, and could not be merged safely. But the diagnosis it made was correct: generic forwarding was causing real routing failures.
+                    </p>
+                </div>
+                <div class="rounded-3xl bg-slate-900 border border-slate-800 p-8">
+                    <h2 class="text-2xl font-bold text-white mb-4">What survived</h2>
+                    <p class="text-slate-300 leading-relaxed">
+                        The living descendant is the current adapter logic in the orchestrator. Today, tools are routed through service-specific mappings because this old branch proved that "one fake universal endpoint" was the wrong abstraction.
+                    </p>
+                </div>
+            </div>
+            <aside class="space-y-6">
+                <div class="rounded-3xl bg-slate-900 border border-slate-800 p-6">
+                    <div class="text-xs font-mono uppercase tracking-[0.25em] text-orange-300 mb-3">Curator Note</div>
+                    <p class="text-sm text-slate-400">This is the ideal museum specimen: the branch died, the idea lived.</p>
+                </div>
+                <div class="rounded-3xl bg-slate-900 border border-slate-800 p-6">
+                    <div class="text-xs font-mono uppercase tracking-[0.25em] text-orange-300 mb-3">Known Descendants</div>
+                    <ul class="text-sm text-slate-300 space-y-2">
+                        <li>Per-tool adapter routing in Mega</li>
+                        <li>Thin MCP bridge thinking</li>
+                        <li>Sharper service topology awareness</li>
+                    </ul>
+                </div>
+            </aside>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vault Variant B | Museum of Evolution</title>
+    <script async src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../../assets/css/museum.css">
+</head>
+<body class="antialiased">
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <a href="../index.html" class="inline-flex items-center text-sm text-orange-300 hover:text-orange-200 mb-8">&larr; Back to museum</a>
+        <section class="rounded-3xl bg-stone-950 border border-stone-800 p-8">
+            <div class="flex flex-wrap items-center gap-3 mb-5">
+                <span class="text-4xl">🔐</span>
+                <span class="px-3 py-1 rounded bg-stone-200 text-stone-800 text-xs font-mono uppercase tracking-wide">Infrastructure</span>
+                <span class="px-3 py-1 rounded bg-green-100 text-green-800 text-xs font-mono uppercase tracking-wide">Alive</span>
+                <span class="px-3 py-1 rounded bg-stone-800 text-stone-300 text-xs font-mono uppercase tracking-wide">Vault Era</span>
+            </div>
+            <h1 class="text-4xl font-extrabold text-white mb-4">Vault Variant B</h1>
+            <p class="text-lg text-stone-300 leading-relaxed">
+                The point where secrets stopped being scattered environment assumptions and became explicit infrastructure with a runtime path, a Web UI, and a human operator workflow.
+            </p>
+        </section>
+
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
+            <div class="rounded-3xl bg-stone-950 border border-stone-800 p-8">
+                <h2 class="text-2xl font-bold text-white mb-4">What changed</h2>
+                <p class="text-stone-300 leading-relaxed">
+                    Instead of hiding keys in local assumptions, the stack gained a Vault overlay, generated runtime env snapshots, and a restart-based injection model. This made secrets operationally visible and far less fragile.
+                </p>
+            </div>
+            <div class="rounded-3xl bg-stone-950 border border-stone-800 p-8">
+                <h2 class="text-2xl font-bold text-white mb-4">Why it matters</h2>
+                <p class="text-stone-300 leading-relaxed">
+                    It is a maturity exhibit. It marks the shift from "the system works on the machine that remembers the keys" to "the system has a reproducible secret path an operator can actually manage."
+                </p>
+            </div>
+        </section>
+
+        <section class="rounded-3xl bg-stone-950 border border-stone-800 p-8 mt-8">
+            <div class="text-xs font-mono uppercase tracking-[0.25em] text-orange-300 mb-3">Surviving Genes</div>
+            <ul class="text-stone-300 space-y-3">
+                <li>Managed secret namespaces instead of ad hoc `.env` sprawl</li>
+                <li>Visible operator workflow through Web UI</li>
+                <li>Runtime rendering and service restart discipline</li>
+                <li>A clearer line between configuration and real secrets</li>
+            </ul>
+        </section>
+    </main>
+</body>
+</html>

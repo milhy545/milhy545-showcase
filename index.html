@@ -4,98 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stanislav "Milhy" Muller - Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600;800&display=swap');
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f5f5f4; /* stone-100 */
-            color: #1c1917; /* stone-900 */
-        }
-
-        .font-mono {
-            font-family: 'JetBrains+Mono', monospace;
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #e7e5e4;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #a8a29e;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #78716c;
-        }
-
-        /* Chart Container Utilities */
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-            height: 300px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 350px;
-            }
-        }
-
-        /* Infrastructure Node Styling */
-        .infra-node {
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        .infra-node:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            border-color: #ea580c; /* orange-600 */
-        }
-        .infra-node.active {
-            border-color: #ea580c;
-            background-color: #fff7ed; /* orange-50 */
-        }
-
-        /* Terminal Window Styling */
-        .terminal-window {
-            background-color: #1e1e1e;
-            color: #d4d4d4;
-            border-radius: 0.5rem;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            overflow: hidden;
-        }
-        .terminal-header {
-            background-color: #333;
-            padding: 0.5rem 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .terminal-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-        .terminal-body {
-            padding: 1rem;
-            font-family: 'JetBrains+Mono', monospace;
-        }
-        .cursor-blink {
-            animation: blink 1s step-end infinite;
-        }
-        @keyframes blink {
-            50% { opacity: 0; }
-        }
-    </style>
+    <script async src="https://cdn.tailwindcss.com"></script>
+    <script async src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="assets/css/site.css">
     <!-- Chosen Palette: Warm Neutrals with Industrial Orange Accents -->
     <!-- Application Structure Plan: Updated Projects Section - Orchestration fix & eDEX-UI addition -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
@@ -118,6 +29,7 @@
                     <button onclick="scrollToSection('infra')" class="text-stone-600 hover:text-orange-600 transition-colors font-medium" data-lang-key="nav_infra">Infrastructure</button>
                     <button onclick="scrollToSection('stack')" class="text-stone-600 hover:text-orange-600 transition-colors font-medium" data-lang-key="nav_stack">Arsenal</button>
                     <button onclick="scrollToSection('projects')" class="text-stone-600 hover:text-orange-600 transition-colors font-medium" data-lang-key="nav_projects">Projects</button>
+                    <button onclick="scrollToSection('museum')" class="text-stone-600 hover:text-orange-600 transition-colors font-medium" data-lang-key="nav_museum">Museum</button>
 
                     <!-- Language Toggle -->
                     <div class="border-l border-stone-300 pl-4 ml-4 flex gap-2">
@@ -143,6 +55,8 @@
                  <button onclick="scrollToSection('pivot')" class="block w-full text-left px-4 py-2 text-stone-600 hover:bg-stone-200" data-lang-key="nav_pivot">The Pivot</button>
                  <button onclick="scrollToSection('infra')" class="block w-full text-left px-4 py-2 text-stone-600 hover:bg-stone-200" data-lang-key="nav_infra">Infrastructure</button>
                  <button onclick="scrollToSection('stack')" class="block w-full text-left px-4 py-2 text-stone-600 hover:bg-stone-200" data-lang-key="nav_stack">Arsenal</button>
+                 <button onclick="scrollToSection('projects')" class="block w-full text-left px-4 py-2 text-stone-600 hover:bg-stone-200" data-lang-key="nav_projects">Projects</button>
+                 <button onclick="scrollToSection('museum')" class="block w-full text-left px-4 py-2 text-stone-600 hover:bg-stone-200" data-lang-key="nav_museum">Museum</button>
             </div>
         </div>
     </nav>
@@ -480,6 +394,95 @@
         </div>
     </section>
 
+    <!-- MUSEUM SECTION -->
+    <section id="museum" class="py-16 bg-white border-y border-stone-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
+                <div class="lg:col-span-1">
+                    <div class="inline-flex items-center rounded-full bg-orange-100 px-3 py-1 text-sm font-medium text-orange-800 mb-4">
+                        Evolution Archive
+                    </div>
+                    <h2 class="text-3xl font-bold text-stone-900 mb-4" data-lang-key="museum_title">Museum of Evolution</h2>
+                    <p class="text-stone-600 leading-relaxed mb-5" data-lang-key="museum_desc">
+                        Not every prototype survives. The good ones mutate into infrastructure. This museum is where I display the branches, pivots, fossils, and weird surviving genes behind my current systems.
+                    </p>
+                    <div class="bg-stone-900 text-stone-300 rounded-2xl p-5 shadow-xl border border-stone-800">
+                        <div class="text-xs font-mono uppercase tracking-[0.25em] text-orange-400 mb-3">Curator Note</div>
+                        <p class="leading-relaxed text-sm" data-lang-key="museum_note">
+                            Engineering archaeology matters. A dead branch can still contain the idea that eventually becomes the stable backbone of a live system.
+                        </p>
+                    </div>
+                    <div class="mt-6 flex flex-col sm:flex-row gap-3">
+                        <a href="archive/museum/" class="inline-flex items-center justify-center px-5 py-3 bg-orange-600 text-white font-semibold rounded-lg shadow-lg hover:bg-orange-700 transition-colors" data-lang-key="btn_museum">
+                            Open the Museum
+                        </a>
+                        <a href="archive/snapshots/README-2026-02-13-pre-update.md" class="inline-flex items-center justify-center px-5 py-3 bg-white text-stone-900 border border-stone-300 font-semibold rounded-lg shadow-sm hover:bg-stone-50 transition-colors" data-lang-key="btn_archive">
+                            Open Raw Archive
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <a href="archive/museum/exhibits/direct-mcp-bridge.html" class="group block rounded-2xl border border-stone-200 bg-stone-50 p-5 hover:border-orange-400 hover:shadow-lg transition-all">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-2xl">🧬</span>
+                            <div class="flex gap-2 text-[11px] font-mono uppercase tracking-wide">
+                                <span class="px-2 py-1 rounded bg-orange-100 text-orange-800">Bridge</span>
+                                <span class="px-2 py-1 rounded bg-blue-100 text-blue-800">Evolved</span>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-bold text-stone-900 group-hover:text-orange-600 transition-colors">Direct MCP Bridge</h3>
+                        <p class="mt-3 text-sm text-stone-600">
+                            A dead branch that still donated the most important survival trait: explicit tool-to-endpoint routing.
+                        </p>
+                    </a>
+
+                    <a href="archive/museum/exhibits/mega-orchestrator-evolution.html" class="group block rounded-2xl border border-stone-200 bg-stone-50 p-5 hover:border-orange-400 hover:shadow-lg transition-all">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-2xl">🏛️</span>
+                            <div class="flex gap-2 text-[11px] font-mono uppercase tracking-wide">
+                                <span class="px-2 py-1 rounded bg-purple-100 text-purple-800">System Mutation</span>
+                                <span class="px-2 py-1 rounded bg-green-100 text-green-800">Alive</span>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-bold text-stone-900 group-hover:text-orange-600 transition-colors">Mega Orchestrator Evolution</h3>
+                        <p class="mt-3 text-sm text-stone-600">
+                            From brittle proxy assumptions to an MCP-compatible nervous system that can serve multiple AI clients.
+                        </p>
+                    </a>
+
+                    <a href="archive/museum/exhibits/vault-variant-b.html" class="group block rounded-2xl border border-stone-200 bg-stone-50 p-5 hover:border-orange-400 hover:shadow-lg transition-all">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-2xl">🔐</span>
+                            <div class="flex gap-2 text-[11px] font-mono uppercase tracking-wide">
+                                <span class="px-2 py-1 rounded bg-stone-200 text-stone-700">Infrastructure</span>
+                                <span class="px-2 py-1 rounded bg-green-100 text-green-800">Alive</span>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-bold text-stone-900 group-hover:text-orange-600 transition-colors">Vault Variant B</h3>
+                        <p class="mt-3 text-sm text-stone-600">
+                            The moment secrets stopped being scattered assumptions and became a managed, restart-driven runtime layer.
+                        </p>
+                    </a>
+
+                    <a href="archive/museum/exhibits/ewaste-cluster.html" class="group block rounded-2xl border border-stone-200 bg-stone-50 p-5 hover:border-orange-400 hover:shadow-lg transition-all">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-2xl">♻️</span>
+                            <div class="flex gap-2 text-[11px] font-mono uppercase tracking-wide">
+                                <span class="px-2 py-1 rounded bg-emerald-100 text-emerald-800">Philosophy</span>
+                                <span class="px-2 py-1 rounded bg-green-100 text-green-800">Alive</span>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-bold text-stone-900 group-hover:text-orange-600 transition-colors">E-Waste Cluster</h3>
+                        <p class="mt-3 text-sm text-stone-600">
+                            Physical proof that the 3R principle is not branding. It is a real infrastructure constraint turned into an advantage.
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- CONTACT SECTION -->
     <section id="contact" class="py-16 bg-stone-900 text-stone-300">
         <div class="max-w-4xl mx-auto px-4 text-center">
@@ -507,7 +510,7 @@
         // --- Translations ---
         const translations = {
             en: {
-                nav_home: "Home", nav_pivot: "The Pivot", nav_infra: "Infrastructure", nav_stack: "Arsenal", nav_projects: "Projects",
+                nav_home: "Home", nav_pivot: "The Pivot", nav_infra: "Infrastructure", nav_stack: "Arsenal", nav_projects: "Projects", nav_museum: "Museum",
                 hero_location: "📍 Newport, UK &bull; Open to Relocation",
                 hero_role: "Junior Linux SysAdmin | Python Developer | Hardware Enthusiast",
                 hero_desc: "Ex-Electrician transitioning to DevOps. I specialize in <span class='font-bold text-stone-800'>Extreme Optimization</span> and the <span class='font-bold text-stone-800'>3R Principle (Re-fix, Reuse, Recycle)</span>. If it runs on an Intel Atom, it will fly on the Cloud.",
@@ -538,6 +541,11 @@
                 repo_4_desc: "Unofficial custom build of Claude for Linux using Rust and Tauri. Features experimental voice input and system integration.",
                 repo_5_desc: "Unified interface leveraging multiple providers (Gemini, Claude, DeepSeek, Ollama) with robust failover and rate-limiting logic.",
                 repo_6_desc: "The central documentation hub. Explains the 3R Principle (Re-fix, Reuse, Recycle) and the philosophy behind running AI on e-waste.",
+                museum_title: "Museum of Evolution",
+                museum_desc: "Not every prototype survives. The good ones mutate into infrastructure. This museum is where I display the branches, pivots, fossils, and weird surviving genes behind my current systems.",
+                museum_note: "Engineering archaeology matters. A dead branch can still contain the idea that eventually becomes the stable backbone of a live system.",
+                btn_museum: "Open the Museum",
+                btn_archive: "Open Raw Archive",
 
                 contact_title: "Ready to Optimize?",
                 contact_desc: "Currently based in Newport, UK. Open to roles in South Wales (Cardiff/Bristol) or Remote. I bring the discipline of an electrician and the logic of a developer.",
@@ -546,7 +554,7 @@
                 term_ready: "# System Ready. Welcome to the portfolio."
             },
             cs: {
-                nav_home: "Domů", nav_pivot: "The Pivot", nav_infra: "Infrastruktura", nav_stack: "Arzenál", nav_projects: "Projekty",
+                nav_home: "Domů", nav_pivot: "The Pivot", nav_infra: "Infrastruktura", nav_stack: "Arzenál", nav_projects: "Projekty", nav_museum: "Muzeum",
                 hero_location: "📍 Newport, UK &bull; Otevřen relokaci",
                 hero_role: "Junior Linux SysAdmin | Python Vývojář | Hardware Nadšenec",
                 hero_desc: "Ex-Elektrikář přecházející do DevOps. Specializuji se na <span class='font-bold text-stone-800'>Extrémní Optimalizaci</span> a <span class='font-bold text-stone-800'>Princip 3R (Re-fix, Reuse, Recycle)</span>. Co běží na Intel Atom, poletí v Cloudu.",
@@ -577,6 +585,11 @@
                 repo_4_desc: "Neoficiální build Claude pro Linux postavený na Rustu a Tauri. Obsahuje experimentální hlasový vstup a systémovou integraci.",
                 repo_5_desc: "Sjednocené rozhraní využívající více poskytovatelů (Gemini, Claude, DeepSeek, Ollama) s robustní logikou pro failover a rate-limiting.",
                 repo_6_desc: "Centrální dokumentační bod. Vysvětluje princip 3R (Re-fix, Reuse, Recycle) a filozofii provozování AI na elektroodpadu.",
+                museum_title: "Muzeum evoluce",
+                museum_desc: "Ne každý prototyp přežije. Ty dobré zmutují v infrastrukturu. Tohle muzeum vystavuje větve, pivoty, fosilie a přeživší geny za mými dnešními systémy.",
+                museum_note: "Inženýrská archeologie má smysl. I mrtvá větev může obsahovat nápad, ze kterého se nakonec stane stabilní páteř živého systému.",
+                btn_museum: "Otevřít muzeum",
+                btn_archive: "Otevřít surový archiv",
 
                 contact_title: "Jdeme optimalizovat?",
                 contact_desc: "Aktuálně v Newportu, UK. Otevřen pozicím v South Wales (Cardiff/Bristol) nebo Remote. Přináším disciplínu elektrikáře a logiku vývojáře.",
